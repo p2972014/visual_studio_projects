@@ -3,7 +3,7 @@
 ################################################################################
 
 /BlazorServerApp/BlazorServerApp/bin/
-/BlazorServerApp/BlazorServerApp/obj
+/BlazorServerApp/BlazorServerApp/obj/
 /BlazorServerApp/.vs/
-/BlazorServerApp/TestProject1/obj
+/BlazorServerApp/TestProject1/obj/
 /BlazorServerApp/TestProject1/bin/
