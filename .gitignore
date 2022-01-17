@@ -2,8 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/BlazorServerApp/TestProject1/obj
-/BlazorServerApp/BlazorServerApp/bin/Debug/net6.0
-/BlazorServerApp/TestProject1/bin/Debug/net6.0
+/BlazorServerApp/BlazorServerApp/bin/
 /BlazorServerApp/BlazorServerApp/obj
-/BlazorServerApp/.vs/BlazorServerApp
+/BlazorServerApp/.vs/
+/BlazorServerApp/TestProject1/obj
+/BlazorServerApp/TestProject1/bin/
