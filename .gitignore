@@ -2,8 +2,18 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/BlazorServerApp/BlazorServerApp/bin/
-/BlazorServerApp/BlazorServerApp/obj/
-/BlazorServerApp/.vs/
-/BlazorServerApp/TestProject1/obj/
-/BlazorServerApp/TestProject1/bin/
+*/bin/*
+*/obj/*
+*/.vs/*
+*/obj/*
+*/bin/*
+*.cache
+/obj/*
+*/obj/*
+*/obj/
+/BlazorWebAssemly/BlazorWebAssemly/obj
+/BlazorWebAssemly/BlazorWebAssemly_https/obj
+/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Shared/obj
+/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Server/obj
+/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Client/obj
+/BlazorWebAssemly/BlazorWebAssemly_progressive/obj
