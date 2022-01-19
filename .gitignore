@@ -17,3 +17,9 @@
 /BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Server/obj
 /BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Client/obj
 /BlazorWebAssemly/BlazorWebAssemly_progressive/obj
+/BlazorServerApp/BlazorServerApp/bin/Debug/net6.0
+/BlazorServerApp/BlazorServerApp/obj/Debug/net6.0
+/BlazorServerApp/BlazorServerApp/obj
+/BlazorServerApp/TestProject1/bin/Debug/net6.0
+/BlazorServerApp/TestProject1/obj/Debug/net6.0
+/BlazorServerApp/TestProject1/obj
