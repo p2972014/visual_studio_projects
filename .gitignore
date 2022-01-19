@@ -2,24 +2,40 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-*/bin/*
-*/obj/*
-*/.vs/*
-*/obj/*
-*/bin/*
-*.cache
-/obj/*
-*/obj/*
-*/obj/
-/BlazorWebAssemly/BlazorWebAssemly/obj
-/BlazorWebAssemly/BlazorWebAssemly_https/obj
-/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Shared/obj
-/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Server/obj
-/BlazorWebAssemly/BlazorWebAssembly_asp_core_hosted/Client/obj
-/BlazorWebAssemly/BlazorWebAssemly_progressive/obj
-/BlazorServerApp/BlazorServerApp/bin/Debug/net6.0
-/BlazorServerApp/BlazorServerApp/obj/Debug/net6.0
-/BlazorServerApp/BlazorServerApp/obj
-/BlazorServerApp/TestProject1/bin/Debug/net6.0
-/BlazorServerApp/TestProject1/obj/Debug/net6.0
-/BlazorServerApp/TestProject1/obj
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
