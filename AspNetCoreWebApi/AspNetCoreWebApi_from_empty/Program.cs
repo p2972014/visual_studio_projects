@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //---
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 //---
 
