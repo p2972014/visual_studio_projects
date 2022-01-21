@@ -1,0 +1,47 @@
+﻿@page
+@model AspNetCoreWebApp.Pages.Page1Model
+@{
+    var m_var1 = new[] { Environment.UserName,Environment.OSVersion.ToString()}.Concat(Environment.GetCommandLineArgs()).ToArray();
+}
+
+123
+
+@for (var i = 0; i < m_var1.Length; i++)
+{
+    <div>@(m_var1[i])</div>    
+}
+<!---->
+@functions{
+    public string GetHello()
+    {
+        return "Hello_"+DateTime.Now.Ticks;
+    }
+}
+
+<button Onclick="RazorFunction()">Click</button>
+
+@section Scripts
+{
+ <script>
+    function RazorFunction() {
+        $("button").html('@GetHello()');
+    }
+
+ </script>
+} 
+<!---->
+<br/>
+<br/>
+<br/>
+<div>buttons handlers
+<form method="post" style="border: 1px solid black">
+    <button class="btn btn-default">post</button>
+</form>
+<form asp-page-handler="Myhandler1" method="post" style="border: 1px solid black">
+    <button class="btn btn-default">Myhandler1</button>
+</form>
+<form asp-page-handler="Myhandler3" method="post" style="border: 1px solid black">
+    <button class="btn btn-default">Myhandler3</button>
+</form>
+Message: @Model.Message
+</div>
