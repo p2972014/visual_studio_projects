@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApi", "AspNetCoreWebApi\AspNetCoreWebApi.csproj", "{3C9CBDC9-75ED-4EA7-A748-8AE483B5A844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreWebApi_from_empty", "AspNetCoreWebApi_from_empty\AspNetCoreWebApi_from_empty.csproj", "{8A0F3349-DAB1-4B4F-8201-54132A109064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApi_from_empty", "AspNetCoreWebApi_from_empty\AspNetCoreWebApi_from_empty.csproj", "{8A0F3349-DAB1-4B4F-8201-54132A109064}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
