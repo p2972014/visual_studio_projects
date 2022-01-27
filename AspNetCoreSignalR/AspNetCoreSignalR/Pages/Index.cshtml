@@ -40,7 +40,8 @@
         });
 
         connection.on("ClientMethod1", (user, message) => {
-            vsl_output.textContent ="user: "+user+" ; message: "+message;
+            //vsl_output.textContent ="user: "+user+" ; message: "+message;
+            vsl_output.innerHTML ="user: "+user+" ; message: "+message;
         });
 
         start();
