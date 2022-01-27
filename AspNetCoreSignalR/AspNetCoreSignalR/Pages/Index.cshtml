@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div style="padding: 50px 0px">SignalR</div>
+<input type="button" id="vsl_btn_call_signalr" value="send message to server" />
+<div>Output from server:</div>
+<div id="vsl_output"></div>
+<script type="text/javascript">
+    async function start() {
+        try {
+            await connection.start();
+            console.log("SignalR Connected.");
+        } catch (err) {
+            console.log(err);
+            setTimeout(start, 5000);
+        }
+    };
+
+    var connection = null;
+
+    //---
+
+    try
+    {
+        connection = new signalR.HubConnectionBuilder()
+            .withUrl("/MyHub")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connection.onclose(async () => {
+            await start();
+        });
+
+        connection.on("ClientMethod1", (user, message) => {
+            vsl_output.textContent ="user: "+user+" ; message: "+message;
+        });
+
+        start();
+
+        //---
+
+        document.getElementById('vsl_btn_call_signalr').addEventListener('click', function (event) {
+            try {
+                //await
+                connection.invoke("ServerMethod1", "User1", "Message1");
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+    }
+    catch(e)
+    {
+        alert(e);
+    }
+
+</script>
+
