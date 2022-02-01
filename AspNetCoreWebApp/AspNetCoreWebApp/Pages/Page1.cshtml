@@ -19,14 +19,15 @@
 }
 
 <button Onclick="RazorFunction()">Click</button>
+<button asp-action="" Onclick="RazorFunction()">Click</button>
 
 @section Scripts
 {
  <script>
     function RazorFunction() {
+        debugger
         $("button").html('@GetHello()');
     }
-
  </script>
 } 
 <!---->

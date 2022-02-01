@@ -1,5 +1,6 @@
 using AspNetCoreWebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using TransientScopedSingleton;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,12 @@ builder.Services.AddRazorPages();
 //---
 
 builder.Services.AddDbContext<m_db1Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//---
+
+builder.Services.AddTransient<ITransientService, OperationService>();
+builder.Services.AddScoped<IScopedService, OperationService>();
+builder.Services.AddSingleton<ISingletonService, OperationService>();
 
 //---
 
