@@ -55,10 +55,18 @@ build_metadata.AdditionalFiles.CssScope = b-01dw2z9bbm
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/visual_studio_projects/BlazorServerApp/BlazorServerApp/Pages/Page3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGFnZTMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/visual_studio_projects/BlazorServerApp/BlazorServerApp/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/visual_studio_projects/BlazorServerApp/BlazorServerApp/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/visual_studio_projects/BlazorServerApp/BlazorServerApp/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
