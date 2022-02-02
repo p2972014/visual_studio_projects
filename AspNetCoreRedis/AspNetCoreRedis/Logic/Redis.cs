@@ -9,7 +9,7 @@ namespace AspNetCoreRedis.Logic
             return await redis_service.GetAsync("cachedTimeUTC");
         }
 
-        public static async Task Set_cachedTimeUTC(IDistributedCache redis_service,IConfiguration Configuration)
+        public static async Task Set_cachedTimeUTC(IDistributedCache redis_service, IConfiguration Configuration)
         {
             var tmp_Redis_cache_timeout = Configuration.GetValue(typeof(double), "Redis_cache_timeout");
             var currentTimeUTC = DateTime.UtcNow.ToString();
