@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AspNetCoreRabbitMQ.Services
 {
-    public class RabbitMQReceiverService : BackgroundService
+    public class RabbitMQReceiverService
     {
         private readonly ILogger<RabbitMQReceiverService> _logger;
 
@@ -52,13 +52,6 @@ namespace AspNetCoreRabbitMQ.Services
             _channel.BasicConsume(queue: "hello",
                                  autoAck: true,
                                  consumer: consumer);
-        }
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            _logger.LogInformation("ExecuteAsync. ReceivedMessage=" + ReceivedMessage);
-
-            return Task.CompletedTask;
         }
     }
 }
