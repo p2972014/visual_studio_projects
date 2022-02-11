@@ -1,0 +1,18 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div style="padding: 10px 0px">--- RabbitMQ ---</div>
+<form method="post">
+    <textarea asp-for="SendedMessage"></textarea>
+    <button type="submit" asp-page-handler="SendMessageToRabbitMQ">SendMessageToRabbitMQ</button>
+    <button type="submit" asp-page-handler="ReceiveMessageFromRabbitMQ">ReceiveMessageFromRabbitMQ</button>
+    <p>ReceivedMessage: @Model.ReceivedMessage</p>
+</form>
