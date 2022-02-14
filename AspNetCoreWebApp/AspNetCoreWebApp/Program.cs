@@ -1,6 +1,7 @@
 using AspNetCoreWebApp.Models;
 using Microsoft.EntityFrameworkCore;
-using TransientScopedSingleton;
+using Microsoft.Extensions.DependencyInjection;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +14,15 @@ builder.Services.AddDbContext<m_db1Context>(options => options.UseSqlServer(buil
 
 //---
 
+//builder.Services.Configure<HostOptions>(options =>
+//{
+//    options.ShutdownTimeout = TimeSpan.FromSeconds(5);
+//});
+
 builder.Services.AddTransient<ITransientService, OperationService>();
 builder.Services.AddScoped<IScopedService, OperationService>();
 builder.Services.AddSingleton<ISingletonService, OperationService>();
+builder.Services.AddHostedService<myHostedService>();
 
 //---
 
