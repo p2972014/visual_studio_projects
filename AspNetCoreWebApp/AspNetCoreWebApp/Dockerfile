@@ -6,19 +6,20 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["AspNetCoreWebApp_with_docker/AspNetCoreWebApp_with_docker.csproj", "AspNetCoreWebApp_with_docker/"]
-RUN dotnet restore "AspNetCoreWebApp_with_docker/AspNetCoreWebApp_with_docker.csproj"
+COPY ["AspNetCoreWebApp/AspNetCoreWebApp.csproj", "AspNetCoreWebApp/"]
+RUN dotnet restore "AspNetCoreWebApp/AspNetCoreWebApp.csproj"
 COPY . .
-WORKDIR "/src/AspNetCoreWebApp_with_docker"
-RUN dotnet build "AspNetCoreWebApp_with_docker.csproj" -c Release -o /app/build
+WORKDIR "/src/AspNetCoreWebApp"
+RUN dotnet build "AspNetCoreWebApp.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AspNetCoreWebApp_with_docker.csproj" -c Release -o /app/publish
+RUN dotnet publish "AspNetCoreWebApp.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AspNetCoreWebApp_with_docker.dll"]
+ENTRYPOINT ["dotnet", "AspNetCoreWebApp.dll"]

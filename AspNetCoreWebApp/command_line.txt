@@ -1,0 +1,30 @@
+﻿	rem https://docs.microsoft.com/ru-ru/aspnet/core/security/docker-https?view=aspnetcore-6.0#certificates
+
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetcorewebapp.pfx -p "QWE098spv"
+dotnet dev-certs https --trust
+	rem %USERPROFILE%\.aspnet\https
+
+dotnet user-secrets -p "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\AspNetCoreWebApp.csproj" init
+dotnet user-secrets -p "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\AspNetCoreWebApp.csproj" set "Kestrel:Certificates:Development:Password" "QWE098spv"
+	rem %APPDATA%\microsoft\UserSecrets\
+dotnet user-secrets -p "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\AspNetCoreWebApp.csproj" set "Db:Development:Password" "0"
+
+dotnet publish AspNetCoreWebApp.csproj /t:ContainerBuild /p:Configuration=Debug
+docker build -f "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\Dockerfile" --force-rm -t aspnetcorewebapp "G:\visual_studio_projects\AspNetCoreWebApp"
+
+docker run --rm -it --name "cont1" -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="QWE098spv" -e ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx -v $env:USERPROFILE\.aspnet\https:C:\https\ aspnetcorewebapp
+	rem https://github.com/dotnet/dotnet-docker/issues/915
+docker run --rm -it --name "cont1" --user ContainerAdministrator -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx -e ASPNETCORE_Kestrel__Certificates__Default__Password="QWE098spv" -v $env:USERPROFILE\.aspnet\https:C:\https\ -v $env:APPDATA\microsoft\UserSecrets\:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets\ -e ASPNETCORE_ENVIRONMENT=Development aspnetcorewebapp
+docker run --rm -d --name "cont1" --user ContainerAdministrator -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx -e ASPNETCORE_Kestrel__Certificates__Default__Password="QWE098spv" -v $env:USERPROFILE\.aspnet\https:C:\https\ -v $env:APPDATA\microsoft\UserSecrets\:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets\ -e ASPNETCORE_ENVIRONMENT=Development aspnetcorewebapp
+docker run --rm -d --name "cont1" --user ContainerAdministrator -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx -e ASPNETCORE_Kestrel__Certificates__Default__Password="QWE098spv" -v $env:USERPROFILE\.aspnet\https:C:\https\ -v $env:APPDATA\microsoft\UserSecrets\:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets\ -e ASPNETCORE_ENVIRONMENT=Development -e Docker:Db:Development:Password=0 aspnetcorewebapp
+
+docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose.yml" up --build
+docker-compose up --build
+docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose.yml" up
+docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose.yml" up -d
+
+start http://localhost:8000
+start https://localhost:8001
+
+docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose.yml" up -d
+start https://localhost:8001

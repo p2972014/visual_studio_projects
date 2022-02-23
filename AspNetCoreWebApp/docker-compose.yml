@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  aspnetcorewebapp:
+    build:
+      context: .
+      dockerfile: AspNetCoreWebApp/Dockerfile
+    image: aspnetcorewebapp
+    user: ContainerAdministrator
+    container_name: aspnetcorewebapp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=8001
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=QWE098spv
+      - Docker:Db:Development:Password=0
+    ports:
+      - 8000:80
+      - 8001:443
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+      - ${APPDATA}\microsoft\UserSecrets\:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets\:ro
+      - ${USERPROFILE}\.aspnet\https:C:\https\:ro     
+    command: start https://localhost:8001
