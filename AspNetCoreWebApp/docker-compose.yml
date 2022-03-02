@@ -21,5 +21,4 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
       - ${APPDATA}\microsoft\UserSecrets\:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets\:ro
-      - ${USERPROFILE}\.aspnet\https:C:\https\:ro     
-    command: start https://localhost:8001
+      - ${USERPROFILE}\.aspnet\https:C:\https\:ro
