@@ -19,14 +19,14 @@ namespace AspNetCoreWebApi.Models
         public virtual DbSet<MT1> MT1s { get; set; } = null!;
         public virtual DbSet<MT2> MT2s { get; set; } = null!;
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,12 @@ namespace AspNetCoreWebApi.Models
                     .HasColumnName("m_c1_text");
 
                 entity.Property(e => e.MT1MId).HasColumnName("m_t1_m_id");
+
+                entity.HasOne(d => d.MT1M)
+                    .WithMany(p => p.MT2s)
+                    .HasForeignKey(d => d.MT1MId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_m_t2_m_t1");
             });
 
             OnModelCreatingPartial(modelBuilder);

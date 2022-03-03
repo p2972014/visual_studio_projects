@@ -8,5 +8,7 @@ namespace AspNetCoreWebApi.Models
         public long MId { get; set; }
         public long MT1MId { get; set; }
         public string MC1Text { get; set; } = null!;
+
+        public virtual MT1 MT1M { get; set; } = null!;
     }
 }
