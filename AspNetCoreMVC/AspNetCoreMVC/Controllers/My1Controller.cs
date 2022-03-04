@@ -4,26 +4,16 @@ using System.Diagnostics;
 
 namespace AspNetCoreMVC.Controllers
 {
-    public class HomeController : Controller
+    public class My1Controller : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<My1Controller> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public My1Controller(ILogger<My1Controller> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Page1()
+        public IActionResult Page3()
         {
             return View();
         }
