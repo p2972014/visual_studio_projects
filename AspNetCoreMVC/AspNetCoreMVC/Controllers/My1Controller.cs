@@ -15,7 +15,7 @@ namespace AspNetCoreMVC.Controllers
 
         public IActionResult Page3()
         {
-            return View();
+            return View(new Page3ViewModel());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
