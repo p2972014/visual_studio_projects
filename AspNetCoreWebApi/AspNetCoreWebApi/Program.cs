@@ -29,7 +29,11 @@ builder.Services.AddSwaggerGen(
 
 //---
 
-builder.Services.AddDbContext<m_db1Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<m_db1Context>(options => 
+    options
+    .UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
 
 //---
 

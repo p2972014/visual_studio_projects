@@ -28,7 +28,10 @@ namespace AspNetCoreWebApi.Controllers
         //}
         public IEnumerable<MRelMT1MT2> Get()
         {
-            return _context.MRelMT1MT2s.Include(it => it.MT1M).Include(it => it.MT2M).Take(10).ToArray();
+            //https://docs.microsoft.com/en-us/ef/core/querying/related-data/eager
+            //return _context.MRelMT1MT2s.Include(it => it.MT1M).Include(it => it.MT2M).Take(10).ToArray();
+            //https://docs.microsoft.com/en-us/ef/core/querying/related-data/lazy
+            return _context.MRelMT1MT2s.Take(10).ToArray();
         }
 
         // GET api/<MyApiController1>/5
