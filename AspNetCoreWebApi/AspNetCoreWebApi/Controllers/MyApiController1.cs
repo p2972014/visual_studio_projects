@@ -12,21 +12,27 @@ namespace AspNetCoreWebApi.Controllers
     {
         private readonly m_db1Context _context;
 
-        public MyApiController1(m_db1Context context)
+        public MyApiController1(
+            m_db1Context context
+            )
         {
             _context = context;
         }
 
         // GET: api/<MyApiController1>
         [HttpGet(Name = "GetMyApiController1")]
-        public IEnumerable<MT1> Get()
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //    //return _context.MT1s.Take(10).ToArray();
+        //}
+        public IEnumerable<MRelMT1MT2> Get()
         {
-            //return new string[] { "value1", "value2" };
-            return _context.MT1s.Take(10).ToArray();
+            return _context.MRelMT1MT2s.Include(it => it.MT1M).Include(it => it.MT2M).Take(10).ToArray();
         }
 
         // GET api/<MyApiController1>/5
-        [HttpGet("{id}",Name=null,Order=10)]
+        [HttpGet("{id}", Name = null, Order = 10)]
         public string Get(int id)
         {
             return "value";
