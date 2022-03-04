@@ -16,6 +16,7 @@ namespace AspNetCoreWebApi.Models
         {
         }
 
+        public virtual DbSet<MRelMT1MT2> MRelMT1MT2s { get; set; } = null!;
         public virtual DbSet<MT1> MT1s { get; set; } = null!;
         public virtual DbSet<MT2> MT2s { get; set; } = null!;
 
@@ -23,13 +24,40 @@ namespace AspNetCoreWebApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //optionsBuilder.UseSqlServer("Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MRelMT1MT2>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("m_rel_m_t1_m_t2");
+
+                entity.HasIndex(e => e.MT1MId, "m_t1_m_id");
+
+                entity.HasIndex(e => e.MT2MId, "m_t2_m_id");
+
+                entity.Property(e => e.MT1MId).HasColumnName("m_t1_m_id");
+
+                entity.Property(e => e.MT2MId).HasColumnName("m_t2_m_id");
+
+                entity.HasOne(d => d.MT1M)
+                    .WithMany()
+                    .HasForeignKey(d => d.MT1MId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_m_rel_m_t1_m_t2_m_t1");
+
+                entity.HasOne(d => d.MT2M)
+                    .WithMany()
+                    .HasForeignKey(d => d.MT2MId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_m_rel_m_t1_m_t2_m_t2");
+            });
+
             modelBuilder.Entity<MT1>(entity =>
             {
                 entity.HasKey(e => e.MId);
@@ -60,14 +88,6 @@ namespace AspNetCoreWebApi.Models
                 entity.Property(e => e.MC1Text)
                     .HasMaxLength(255)
                     .HasColumnName("m_c1_text");
-
-                entity.Property(e => e.MT1MId).HasColumnName("m_t1_m_id");
-
-                entity.HasOne(d => d.MT1M)
-                    .WithMany(p => p.MT2s)
-                    .HasForeignKey(d => d.MT1MId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_m_t2_m_t1");
             });
 
             OnModelCreatingPartial(modelBuilder);
