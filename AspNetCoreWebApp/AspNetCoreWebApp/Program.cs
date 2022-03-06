@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using AspNetCoreWebApp.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+//---
+
+app.UseMiddleware<MyMiddleware1>();
+app.UseMiddleware<MyMiddleware2>();
 
 //---
 
