@@ -103,21 +103,17 @@ namespace WinFormsApp1
                             new Func<Task>(async () =>
                             {
                                 await Task.Run(() => { });
-                                AddStr(DateTime.Now.ToString() + ". func2. 1"); // при первой компилл€ции пропускает выполнение этой строки
+                                AddStr(DateTime.Now.ToString() + ". func2. 1");
                                 Task.Delay(100).Wait();
                                 AddStr(DateTime.Now.ToString() + ". func2. 2");
-                                Task.Delay(100).Wait();
-                                AddStr(DateTime.Now.ToString() + ". func2. 3");
                             })()
                             ,
                             new Func<Task>(async () =>
                             {
                                 await Task.Run(() => { });
-                                AddStr(DateTime.Now.ToString() + ". func3. 1"); // при первой компилл€ции пропускает выполнение этой строки
+                                AddStr(DateTime.Now.ToString() + ". func3. 1");
                                 Task.Delay(50).Wait();
                                 AddStr(DateTime.Now.ToString() + ". func3. 2");
-                                Task.Delay(50).Wait();
-                                AddStr(DateTime.Now.ToString() + ". func3. 3");
                             })()
                             );
                     })
@@ -212,27 +208,21 @@ namespace WinFormsApp1
         private void button7_Click(object sender, EventArgs e)
         {
             RunMyFunc(() =>
-                Task
-                    .Run(async () =>
+                Task.WhenAll(
+                    Task.Run(() =>
                     {
-                        await Task.WhenAll(
-                            Task.Run(async () =>
-                            {
-                                await Task.Yield();
-                                AddStr(DateTime.Now.ToString() + ". func2. 1");
-                                Task.Delay(100).Wait();
-                                AddStr(DateTime.Now.ToString() + ". func2. 2");
-                            })
-                            ,
-                            Task.Run(async () =>
-                            {
-                                await Task.Yield();
-                                AddStr(DateTime.Now.ToString() + ". func3. 1");
-                                Task.Delay(50).Wait();
-                                AddStr(DateTime.Now.ToString() + ". func3. 2");
-                            })
-                            );
+                        AddStr(DateTime.Now.ToString() + ". func2. 1");
+                        Task.Delay(100).Wait();
+                        AddStr(DateTime.Now.ToString() + ". func2. 2");
                     })
+                    ,
+                    Task.Run(() =>
+                    {
+                        AddStr(DateTime.Now.ToString() + ". func3. 1");
+                        Task.Delay(50).Wait();
+                        AddStr(DateTime.Now.ToString() + ". func3. 2");
+                    })
+                    )
                     .Wait()
                 );
         }
