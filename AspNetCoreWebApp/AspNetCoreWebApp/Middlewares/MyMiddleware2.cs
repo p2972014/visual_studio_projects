@@ -39,13 +39,4 @@ namespace AspNetCoreWebApp.Middlewares
             _logger.LogInformation("MyMiddleware2. Invoke. response");
         }
     }
-
-    //// Extension method used to add the middleware to the HTTP request pipeline.
-    //public static class MyMiddleware2Extensions
-    //{
-    //    public static IApplicationBuilder UseMyMiddleware2(this IApplicationBuilder builder)
-    //    {
-    //        return builder.UseMiddleware<MyMiddleware2>();
-    //    }
-    //}
 }
