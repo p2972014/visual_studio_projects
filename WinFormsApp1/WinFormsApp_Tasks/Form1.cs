@@ -24,6 +24,7 @@ namespace WinFormsApp1
         //        _strs.Add(added_str);
         //    }
         //}
+
         private readonly SemaphoreSlim globalLock = new SemaphoreSlim(1);
         void AddStr(string added_str)
         {
@@ -33,6 +34,16 @@ namespace WinFormsApp1
 
             globalLock.Release();
         }
+
+        //private readonly Semaphore globalLock = new Semaphore(1, 1);
+        //void AddStr(string added_str)
+        //{
+        //    globalLock.WaitOne();
+
+        //    _strs.Add(added_str);
+
+        //    globalLock.Release();
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
