@@ -158,7 +158,7 @@ namespace WinFormsApp1
                         await Task.WhenAll(
                             new Func<Task>(async () =>
                             {
-                                await Task.Delay(0);
+                                await Task.Delay(0); // не передаёт управление вышестоящей функции
                                 AddStr(DateTime.Now.ToString() + ". func2. 1");
                                 Task.Delay(100).Wait();
                                 AddStr(DateTime.Now.ToString() + ". func2. 2");
