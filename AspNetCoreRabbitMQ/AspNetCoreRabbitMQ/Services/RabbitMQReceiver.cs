@@ -5,16 +5,25 @@ using System.Text;
 
 namespace AspNetCoreRabbitMQ.Services
 {
-    public class RabbitMQReceiverService
+    public class RabbitMQReceiverService : IDisposable
     {
         private readonly ILogger<RabbitMQReceiverService> _logger;
 
         private IServiceProvider _sp;
         private ConnectionFactory _factory;
         private IConnection _connection;
-        private IModel _channel;
+        const string _queue_name = "hello";
 
-        public string ReceivedMessage { get; set; }
+        public IModel _channel { get; private set; }
+
+        public void SendMessageToRabbitMQ(string _sendedMessage)
+        {
+            _channel.BasicPublish(exchange: "",
+                routingKey: _queue_name,
+                basicProperties: null,
+                body: Encoding.UTF8.GetBytes(_sendedMessage));
+        }
+        public string? ReceivedMessageFromRabbitMQ { get; private set; }
 
         public RabbitMQReceiverService(IServiceProvider sp, ILogger<RabbitMQReceiverService> logger)
         {
@@ -24,7 +33,7 @@ namespace AspNetCoreRabbitMQ.Services
             //---
 
             _logger.LogInformation("RabbitMQReceiverService");
-            
+
             //---
 
             _factory = new ConnectionFactory()
@@ -36,7 +45,7 @@ namespace AspNetCoreRabbitMQ.Services
             };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "hello",
+            _channel.QueueDeclare(queue: _queue_name,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -47,11 +56,19 @@ namespace AspNetCoreRabbitMQ.Services
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                ReceivedMessage = message;
+                ReceivedMessageFromRabbitMQ = message;
             };
-            _channel.BasicConsume(queue: "hello",
+            _channel.BasicConsume(queue: _queue_name,
                                  autoAck: true,
                                  consumer: consumer);
+        }
+
+        public void Dispose()
+        {
+            _logger.LogInformation("RabbitMQReceiverService. Dispose");
+
+            _channel.Dispose();
+            _connection.Dispose();
         }
     }
 }

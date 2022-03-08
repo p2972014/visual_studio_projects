@@ -21,7 +21,7 @@ namespace AspNetCoreWebApp.Pages
 
         public void OnPost()
         {
-            Message = "Form Posted";
+            Message = "Form Posted. " + DateTime.Now;
         }
         public void OnPostMyhandler1(int id)
         {
