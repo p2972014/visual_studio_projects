@@ -1,4 +1,7 @@
 ﻿@page "/page1"
+@using Microsoft.Extensions.Logging
+@implements IDisposable
+@inject ILogger<Page1> Logger
 
 <h3>page1</h3>
 
@@ -13,13 +16,89 @@
     </p>
 }
 
-<div>mousePointerMessage: <p>@mousePointerMessage</p></div>
+<div>mousePointerMessage: @mousePointerMessage</div>
+<div>OnAfterRenderAsync: @m_str1</div>
 
 @code {
     private string? mousePointerMessage;
+    private string? m_str1;
+    private string? m_tmp_mousePointerMessage_2;
 
     private void ReportPointerLocation(MouseEventArgs e)
     {
         mousePointerMessage = $"Mouse coordinates: {e.ScreenX}:{e.ScreenY}";
+    }
+
+    //---
+
+    public Page1(
+        //ILogger<Page1> _logger
+        )
+    {
+        // "Logger" is not initialized yet
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Logger.LogInformation("SetParametersAsync-start");
+        await base.SetParametersAsync(parameters);
+        Logger.LogInformation("SetParametersAsync-end");
+    }
+
+    protected override void OnInitialized()
+    {
+        Logger.LogInformation("OnInitialized-start");
+        base.OnInitialized();
+        Logger.LogInformation("OnInitialized-end");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Logger.LogInformation("OnInitializedAsync-start");
+        await base.OnInitializedAsync();
+        Logger.LogInformation("OnInitializedAsync-end");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Logger.LogInformation("OnParametersSet-start");
+        base.OnParametersSet();
+        Logger.LogInformation("OnParametersSet-end");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Logger.LogInformation("OnParametersSetAsync-start");
+        await base.OnParametersSetAsync();
+        Logger.LogInformation("OnParametersSetAsync-end");
+    }
+
+    protected override void OnAfterRender(bool firstRender) // после вызова событий
+    {
+        Logger.LogInformation("OnAfterRender({firstRender})-start", firstRender);
+        base.OnAfterRender(firstRender);
+        Logger.LogInformation("OnAfterRender({firstRender})-end", firstRender);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Logger.LogInformation("OnAfterRenderAsync({firstRender})-start", firstRender);
+        await base.OnAfterRenderAsync(firstRender);
+        Logger.LogInformation("OnAfterRenderAsync({firstRender})-end", firstRender);
+        //---
+        if (firstRender == false)
+        {
+            if (m_tmp_mousePointerMessage_2 != mousePointerMessage)
+            {
+                m_tmp_mousePointerMessage_2 = mousePointerMessage;
+                m_str1 = DateTime.Now + " | " + mousePointerMessage;
+                StateHasChanged();
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        Logger.LogInformation("Dispose");
     }
 }
