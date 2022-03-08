@@ -9,7 +9,7 @@ namespace TestProject1
         public void Test1()
         {
             // Arrange
-            using var context = new Bunit.TestContext();
+            using var context = new TestContext();
            
             var page = context.RenderComponent<BlazorServerApp.Pages.Counter>();
             page.Find("#vsl_btn1").Click();
