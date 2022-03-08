@@ -44,13 +44,13 @@ namespace AspNetCoreWebApp.Pages
         }
 
         void tmp_UpdateServicesIds()
-        { 
-             ViewData["transient1"] = _transientService1.GetOperationID().ToString();
+        {
+            ViewData["transient1"] = _transientService1.GetOperationID().ToString();
             ViewData["transient2"] = _transientService2.GetOperationID().ToString();
             ViewData["scoped1"] = _scopedService1.GetOperationID().ToString();
             ViewData["scoped2"] = _scopedService2.GetOperationID().ToString();
             ViewData["singleton1"] = _singletonService1.GetOperationID().ToString();
-            ViewData["singleton2"] = _singletonService2.GetOperationID().ToString();       
+            ViewData["singleton2"] = _singletonService2.GetOperationID().ToString();
         }
     }
 }
