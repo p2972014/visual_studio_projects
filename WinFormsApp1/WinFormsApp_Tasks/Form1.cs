@@ -9,14 +9,14 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        //public List<string> _strs = new List<string>();       
+        public List<string> _strs = new List<string>();
 
-        //void RunMyFunc(Action func)
-        //{
-        //    _strs.Clear();
-        //    func();
-        //    textBox1.Text = String.Join(Environment.NewLine, _strs);
-        //}
+        void RunMyFunc(Action func)
+        {
+            _strs.Clear();
+            func();
+            textBox1.Text = String.Join(Environment.NewLine, _strs);
+        }
 
         //object lockObject = new object();
         //void AddStr(string added_str)
@@ -27,15 +27,15 @@ namespace WinFormsApp1
         //    }
         //}
 
-        //private readonly SemaphoreSlim globalLock = new SemaphoreSlim(1);
-        //void AddStr(string added_str)
-        //{
-        //    globalLock.Wait();
+        private readonly SemaphoreSlim globalLock = new SemaphoreSlim(1);
+        void AddStr(string added_str)
+        {
+            globalLock.Wait();
 
-        //    _strs.Add(added_str);
+            _strs.Add(added_str);
 
-        //    globalLock.Release();
-        //}
+            globalLock.Release();
+        }
 
         //private readonly Semaphore globalLock = new Semaphore(1, 1);
         //void AddStr(string added_str)
@@ -47,17 +47,17 @@ namespace WinFormsApp1
         //    globalLock.Release();
         //}
 
-        void RunMyFunc(Action func)
-        {
-            _strs.Clear();
-            func();
-            textBox1.Text = String.Join(Environment.NewLine, _strs);
-        }
-        ConcurrentQueue<string> _strs = new ConcurrentQueue<string>();
-        void AddStr(string added_str)
-        {
-            _strs.Enqueue(added_str);
-        }
+        //public List<KeyValuePair<long, string>> _strs = new List<KeyValuePair<long, string>>();
+        //void RunMyFunc(Action func)
+        //{
+        //    _strs.Clear();
+        //    func();
+        //    textBox1.Text = String.Join(Environment.NewLine, _strs.OrderBy(it => it.Key).Select(it => it.Value));
+        //}
+        //void AddStr(string added_str)
+        //{
+        //    _strs.Add(new KeyValuePair<long, string>(DateTime.Now.Ticks, added_str));
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -82,7 +82,7 @@ namespace WinFormsApp1
                             );
                     })
                     .Wait()
-                );            
+                );
         }
 
         private void button2_Click(object sender, EventArgs e)
