@@ -59,6 +59,15 @@ namespace WinFormsApp1
         //    _strs.Add(new KeyValuePair<long, string>(DateTime.Now.Ticks, added_str));
         //}
 
+        //private void sub2()
+        //{
+        //    sub1();
+        //}
+        //private async void sub1()
+        //{
+        //    await Task.Yield();
+        //}
+
         private void button1_Click(object sender, EventArgs e)
         {
             RunMyFunc(() =>
@@ -250,6 +259,30 @@ namespace WinFormsApp1
                     )
                     .Wait()
                 );
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            RunMyFunc(() =>
+                {
+                    Task.Run(async () =>
+                    {
+                        await sub2();
+                    }).Wait();
+                }
+                );
+        }
+        private async Task sub2()
+        {
+            AddStr(DateTime.Now.ToString() + ". sub2. 1");
+            await sub3();
+            AddStr(DateTime.Now.ToString() + ". sub2. 2");
+        }
+        private async Task sub3()
+        {
+            AddStr(DateTime.Now.ToString() + ". sub3. 1");
+            await Task.Yield();
+            AddStr(DateTime.Now.ToString() + ". sub3. 2");
         }
     }
 }
