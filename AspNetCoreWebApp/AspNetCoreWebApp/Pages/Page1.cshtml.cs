@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace AspNetCoreWebApp.Pages
 {
+    [BindProperties]
     public class Page1Model : PageModel
     {
         private readonly IEnumerable<EndpointDataSource> _endpointSources;
@@ -13,20 +14,35 @@ namespace AspNetCoreWebApp.Pages
             _endpointSources = endpointSources;
         }
 
+        //---
+
         public string Message { get; set; } = "Initial Request";
+        [BindProperty]
+        public string m_input1 { get; set; }
         public void OnGet()
         {
-
+            m_input1 = "OnGet. " + DateTime.Now;
         }
 
+        //public void OnPost()
         public void OnPost()
         {
             Message = "Form Posted. " + DateTime.Now;
         }
+
+        public void OnPut()
+        { 
+        }
+
+        public void OnDelete()
+        { 
+        }
+
         public void OnPostMyhandler1(int id)
         {
             Message = "Myhandler1";
         }
+
         public void OnPostMyhandler3(int id)
         {
             //Message = "Myhandler3";

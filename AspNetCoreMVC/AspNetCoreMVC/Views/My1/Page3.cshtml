@@ -4,3 +4,10 @@
 }
 <h1>@ViewData["Title"]</h1>
 date:<div>@Model?.m_now</div>
+m_str1:<div>@Model?.m_str1</div>
+<form method="post" style="border: 1px solid black">
+    <input asp-for="m_input1" class="form-control" />
+    <button id="vsl_btn1" >post</button>
+    <button id="vsl_btn1" asp-action="Page3Post">Page3Post</button>
+</form>
+

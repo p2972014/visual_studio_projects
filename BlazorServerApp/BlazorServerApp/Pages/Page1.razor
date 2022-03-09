@@ -6,6 +6,7 @@
 <h3>page1</h3>
 
 <div>123</div>
+m_InputValue: <input @bind="m_InputValue" />
 
 @for (var i = 0; i < 4; i++)
 {
@@ -23,6 +24,7 @@
     private string? mousePointerMessage;
     private string? m_str1;
     private string? m_tmp_mousePointerMessage_2;
+    private string? m_InputValue;
 
     private void ReportPointerLocation(MouseEventArgs e)
     {
@@ -51,7 +53,6 @@
         base.OnInitialized();
         Logger.LogInformation("OnInitialized-end");
     }
-
     protected override async Task OnInitializedAsync()
     {
         Logger.LogInformation("OnInitializedAsync-start");
@@ -65,7 +66,6 @@
         base.OnParametersSet();
         Logger.LogInformation("OnParametersSet-end");
     }
-
     protected override async Task OnParametersSetAsync()
     {
         Logger.LogInformation("OnParametersSetAsync-start");
@@ -79,7 +79,6 @@
         base.OnAfterRender(firstRender);
         Logger.LogInformation("OnAfterRender({firstRender})-end", firstRender);
     }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         Logger.LogInformation("OnAfterRenderAsync({firstRender})-start", firstRender);
@@ -95,6 +94,11 @@
                 StateHasChanged();
             }
         }
+    }
+
+    protected override bool ShouldRender()
+    {
+        return base.ShouldRender();
     }
 
     public void Dispose()

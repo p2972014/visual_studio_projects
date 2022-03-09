@@ -35,8 +35,10 @@
 <br/>
 <br/>
 <div>buttons handlers
-<form method="post" style="border: 1px solid black">
-    <button class="btn btn-default">post</button>
+
+<form method="post" style="border: 1px solid black">    
+    <input asp-for="m_input1" class="form-control" />
+    <input type="submit" value="post" class="btn btn-primary" />
 </form>
 <form asp-page-handler="Myhandler1" method="post" style="border: 1px solid black">
     <button class="btn btn-default">Myhandler1</button>
