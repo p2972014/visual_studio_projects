@@ -265,23 +265,24 @@ namespace WinFormsApp1
         {
             RunMyFunc(() =>
                 {
-                    Task.Run(async () =>
-                    {
-                        await sub2();
-                    }).Wait();
+                    //Task.Run(() =>
+                    //{
+                        sub2().Wait();
+                        Task.Delay(1000).Wait();
+                    //}).Wait();
                 }
                 );
         }
         private async Task sub2()
         {
             AddStr(DateTime.Now.ToString() + ". sub2. 1");
-            await sub3();
+            sub3();
             AddStr(DateTime.Now.ToString() + ". sub2. 2");
         }
         private async Task sub3()
         {
             AddStr(DateTime.Now.ToString() + ". sub3. 1");
-            await Task.Yield();
+            Task.Delay(100).Wait();
             AddStr(DateTime.Now.ToString() + ". sub3. 2");
         }
     }
