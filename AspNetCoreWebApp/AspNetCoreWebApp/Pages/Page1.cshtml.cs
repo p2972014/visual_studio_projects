@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace AspNetCoreWebApp.Pages
 {
-    [BindProperties]
+    //[BindProperties]
     public class Page1Model : PageModel
     {
         private readonly IEnumerable<EndpointDataSource> _endpointSources;

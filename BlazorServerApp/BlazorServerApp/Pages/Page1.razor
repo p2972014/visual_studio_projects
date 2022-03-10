@@ -6,7 +6,8 @@
 <h3>page1</h3>
 
 <div>123</div>
-m_InputValue: <input @bind="m_InputValue" />
+m_InputValue:
+<input @bind="m_InputValue" />
 
 @for (var i = 0; i < 4; i++)
 {
@@ -20,15 +21,36 @@ m_InputValue: <input @bind="m_InputValue" />
 <div>mousePointerMessage: @mousePointerMessage</div>
 <div>OnAfterRenderAsync: @m_str1</div>
 
+<div style="margin: 10px 0px; border: 1px solid black"></div>
+
+<div>
+    выбор файла:
+    <InputFile OnChange="@LoadFiles" multiple />
+</div>
+<div>
+    добавленные файлы:@m_files
+</div>
+
+<div style="margin: 10px 0px; border: 1px solid black"></div>
+
+
 @code {
     private string? mousePointerMessage;
     private string? m_str1;
     private string? m_tmp_mousePointerMessage_2;
     private string? m_InputValue;
 
+    private string? m_files;
+
     private void ReportPointerLocation(MouseEventArgs e)
     {
         mousePointerMessage = $"Mouse coordinates: {e.ScreenX}:{e.ScreenY}";
+    }
+
+    private void LoadFiles(InputFileChangeEventArgs e)
+    {
+        var tmp_files = e.GetMultipleFiles(e.FileCount).ToArray();
+        m_files = String.Join(';', tmp_files.Select(it => it.Name));
     }
 
     //---
