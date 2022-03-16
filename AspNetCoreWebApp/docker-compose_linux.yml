@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  aspnetcorewebapp_linux:
+    build:
+      context: .
+      dockerfile: AspNetCoreWebApp/Dockerfile
+    image: aspnetcorewebapp_linux
+    container_name: aspnetcorewebapp_linux
+    environment:     
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=QWE098spv
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetcorewebapp.pfx      
+      - ASPNETCORE_HTTPS_PORT=8091
+      - Docker:Db:Development:Password=0
+    ports:
+      - 8090:80
+      - 8091:443
+    volumes:
+      - ~/.aspnet/https:/https:ro

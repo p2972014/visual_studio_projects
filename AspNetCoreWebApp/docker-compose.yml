@@ -11,9 +11,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=8001
       - ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=QWE098spv
+      - ASPNETCORE_HTTPS_PORT=8001
       - Docker:Db:Development:Password=0
     ports:
       - 8000:80

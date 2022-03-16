@@ -28,3 +28,9 @@ start https://localhost:8001
 
 docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose.yml" up -d
 start https://localhost:8001
+
+--- linux
+
+docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose_linux.yml" up -d
+start https://localhost:8091
+start http://localhost:8090
