@@ -38,28 +38,3 @@ docker push p2972014/aspnetcorewebapp_linux
 docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose_linux.yml" up -d
 start https://localhost:8091
 start http://localhost:8090
-
-
---- kubernetes
-
-kubectl delete deployment aspnetcorewebapp-deployment
-kubectl delete service aspnetcorewebapp-clusterip
-kubectl delete service aspnetcorewebapp-nodeport
-kubectl delete ingress aspnetcorewebapp-ingress
-kubectl apply -f G:\visual_studio_projects\AspNetCoreWebApp\Kubernetes_linux.yaml
-
-kubectl get deployments --all-namespaces=true
-kubectl get services --all-namespaces=true
-kubectl get ingress --all-namespaces=true
-kubectl get pods --all-namespaces=true
-
-kubectl get deployments
-kubectl get services
-kubectl get ingress
-kubectl get pods
-
-kubectl delete deployment aspnetcorewebapp-deployment
-kubectl delete service aspnetcorewebapp-clusterip
-kubectl delete service aspnetcorewebapp-nodeport
-kubectl delete ingress aspnetcorewebapp-ingress
-kubectl apply -f C:\Kubernetes\depl_3.yaml
