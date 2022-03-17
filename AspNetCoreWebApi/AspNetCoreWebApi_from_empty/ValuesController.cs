@@ -12,7 +12,9 @@ namespace AspNetCoreWebApi_from_empty
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { 
+                "this assembly: " + this?.GetType()?.Assembly?.FullName, 
+                "value1", "value2" };
         }
 
         // GET api/<ValuesController>/5
