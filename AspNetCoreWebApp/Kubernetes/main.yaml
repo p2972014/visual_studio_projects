@@ -68,6 +68,7 @@ spec:
       port: 80 # порт доступа к этому сервису внутри сети
       targetPort: 80 # порт приложения (kind: Deployment)
       nodePort: 32501 # порт для доступа с локального ПК
+        # https://kubernetes.io/ru/docs/tutorials/kubernetes-basics/expose/expose-intro/
 ---
 # не обязательно для доступа извне
     # https://kubernetes.io/docs/concepts/services-networking/ingress/
