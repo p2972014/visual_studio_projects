@@ -14,10 +14,24 @@ spec:
     spec:
       containers:
         - name: aspnetcorewebapp
-          image: p2972014/aspnetcorewebapp_linux          
+          image: p2972014/aspnetcorewebapp_linux_2
           ports:
             - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: bak_ASPNETCORE_HTTPS_PORT
+              value: "443"
+            - name: bak_ASPNETCORE_Kestrel__Certificates__Default__Password
+              value: "QWE098spv"
+            - name: bak_ASPNETCORE_Kestrel__Certificates__Default__Path
+              value: "/https/aspnetcorewebapp.pfx"
+            - name: bak_ASPNETCORE_URLS
+              value: "https://+:443;http://+:80"
+            - name: Docker_Db_Development_Password
+              value: "0"
 ---
+# не об€зательно дл€ доступа извне
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,7 +59,9 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 32501 # порт дл€ доступа с локального ѕ 
 ---
+# не об€зательно дл€ доступа извне
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -53,10 +69,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
-spec:
+spec:  
   rules:
-  - host: localhost
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -64,4 +79,4 @@ spec:
           service:
             name: aspnetcorewebapp-clusterip
             port:
-              number: 8095
+              number: 80

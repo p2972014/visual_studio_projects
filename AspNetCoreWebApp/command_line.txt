@@ -32,6 +32,7 @@ start https://localhost:8001
 --- linux
 
 docker build -f "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\Dockerfile" --force-rm -t p2972014/aspnetcorewebapp_linux "G:\visual_studio_projects\AspNetCoreWebApp"
+docker login --username p2972014 --password 098spv098spv
 docker push p2972014/aspnetcorewebapp_linux
 
 docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose_linux.yml" up -d
@@ -40,6 +41,12 @@ start http://localhost:8090
 
 
 --- kubernetes
+
+kubectl delete deployment aspnetcorewebapp-deployment
+kubectl delete service aspnetcorewebapp-clusterip
+kubectl delete service aspnetcorewebapp-nodeport
+kubectl delete ingress aspnetcorewebapp-ingress
+kubectl apply -f G:\visual_studio_projects\AspNetCoreWebApp\Kubernetes_linux.yaml
 
 kubectl get deployments --all-namespaces=true
 kubectl get services --all-namespaces=true
@@ -55,6 +62,4 @@ kubectl delete deployment aspnetcorewebapp-deployment
 kubectl delete service aspnetcorewebapp-clusterip
 kubectl delete service aspnetcorewebapp-nodeport
 kubectl delete ingress aspnetcorewebapp-ingress
-kubectl apply -f C:\Kubernetes\depl_2.yaml
-
-kubectl apply -f C:\Kubernetes\aspnetcorewebapp-linux-deployment.yaml
+kubectl apply -f C:\Kubernetes\depl_3.yaml

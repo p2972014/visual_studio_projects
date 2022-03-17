@@ -27,7 +27,7 @@ builder.Services.AddRazorPages();
 
 var _InDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 var _ConnectionString_key = _InDocker ? "DefaultConnection_docker" : "DefaultConnection";
-var _key_Docker_Db_Development_Password = @"Docker:Db:Development:Password";
+var _key_Docker_Db_Development_Password = @"Docker_Db_Development_Password";
 var tmp_ConnectionString_3 = builder.Configuration.GetConnectionString(_ConnectionString_key) ?? String.Empty;
 var tmp_Env_Docker_db_password = Environment.GetEnvironmentVariable(_key_Docker_Db_Development_Password);
 var tmp_Cfg_Db_Development_Password = builder.Configuration.GetValue<string>(_key_Docker_Db_Development_Password);
@@ -57,7 +57,7 @@ var app = builder.Build();
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
