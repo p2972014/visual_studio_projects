@@ -1,49 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aspnetcorewebapp-deployment
+  name: aspnetcorewebapi-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: aspnetcorewebapp
+      app: aspnetcorewebapi
   template:
     metadata:
       labels:
-        app: aspnetcorewebapp
+        app: aspnetcorewebapi
     spec:
       containers:
-        - name: aspnetcorewebapp
-          image: aspnetcorewebapp
+        - name: aspnetcorewebapi
+          image: aspnetcorewebapi
           imagePullPolicy: IfNotPresent # загрузка образа из локального хранилища https://kubernetes.io/docs/concepts/containers/images/#updating-images
           ports:
             - containerPort: 80
-          env: # https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
-            - name: ASPNETCORE_ENVIRONMENT
-              value: "Development"
-            - name: bak_ASPNETCORE_HTTPS_PORT
-              value: "443"
-            - name: bak_ASPNETCORE_Kestrel__Certificates__Default__Password
-              value: "QWE098spv"
-            - name: bak_ASPNETCORE_Kestrel__Certificates__Default__Path
-              value: "/https/aspnetcorewebapp.pfx"
-            - name: bak_ASPNETCORE_URLS
-              value: "https://+:443;http://+:80"
-            - name: Docker_Db_Development_Password
-              value: "0"
 ---
 # не обязательно для доступа извне
 apiVersion: v1
 kind: Service
 metadata:
-# может использоваться в url для доступа внутри сети, например http://aspnetcorewebapp-clusterip
-  name: aspnetcorewebapp-clusterip 
+# может использоваться в url для доступа внутри сети, например http://aspnetcorewebapi-clusterip
+  name: aspnetcorewebapi-clusterip 
 spec:
   type: ClusterIP
   selector:
-    app: aspnetcorewebapp
+    app: aspnetcorewebapi
   ports:
-  - name: aspnetcorewebapp
+  - name: aspnetcorewebapi
     protocol: TCP
     port: 80 # порт доступа к этому сервису внутри сети
     targetPort: 80 # порт приложения (kind: Deployment)
@@ -55,19 +42,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: aspnetcorewebapp-nodeport # может использоваться в url для доступа внутри сети, например http://aspnetcorewebapp-nodeport
+  name: aspnetcorewebapi-nodeport # может использоваться в url для доступа внутри сети, например http://aspnetcorewebapi-nodeport
     # https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-hostname-and-subdomain-fields
     # https://devops.stackexchange.com/a/2446
 spec:
   type: NodePort
   selector:
-    app: aspnetcorewebapp
+    app: aspnetcorewebapi
   ports:
-    - name: aspnetcorewebapp
+    - name: aspnetcorewebapi
       protocol: TCP
       port: 80 # порт доступа к этому сервису внутри сети
       targetPort: 80 # порт приложения (kind: Deployment)
-      nodePort: 32501 # порт для доступа с локального ПК
+      nodePort: 32502 # порт для доступа с локального ПК
 ---
 # не обязательно для доступа извне
     # https://kubernetes.io/docs/concepts/services-networking/ingress/
@@ -75,7 +62,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: aspnetcorewebapp-ingress
+  name: aspnetcorewebapi-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
@@ -89,6 +76,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: aspnetcorewebapp-clusterip
+            name: aspnetcorewebapi-clusterip
             port:
               number: 80

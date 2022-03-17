@@ -1,0 +1,3 @@
+﻿--- linux
+
+docker build -f "G:\visual_studio_projects\AspNetCoreWebApi\AspNetCoreWebApi_from_empty\Dockerfile" --force-rm -t aspnetcorewebapi "G:\visual_studio_projects\AspNetCoreWebApi"

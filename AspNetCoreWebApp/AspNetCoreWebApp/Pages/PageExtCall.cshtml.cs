@@ -5,12 +5,12 @@ using System.Text;
 
 namespace AspNetCoreWebApp.Pages
 {
+    [BindProperties]
     public class PageExtCallModel : PageModel
-    {
-        [BindProperty]
-        public string m_url { get; set; }
-        [BindProperty]
-        public string m_url_content { get; set; }
+    {        
+        public string? m_url { get; set; }
+        public string? m_url_content { get; set; }        
+        public string? m_error { get; private set; }
 
         private readonly ILogger<PageExtCallModel> _iLogger;
 
@@ -33,6 +33,7 @@ namespace AspNetCoreWebApp.Pages
             }
             catch (Exception ex)
             {
+                m_error = ex.Message + ". " + ex.StackTrace;
                 _iLogger.LogError(ex, @"PageExtCallModel.OnPost");
             }
         }

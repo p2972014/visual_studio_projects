@@ -1,8 +1,8 @@
-﻿kubectl delete deployment aspnetcorewebapp-deployment
-kubectl delete service aspnetcorewebapp-clusterip
-kubectl delete service aspnetcorewebapp-nodeport
-kubectl delete ingress aspnetcorewebapp-ingress
-kubectl apply -f G:\visual_studio_projects\AspNetCoreWebApp\Kubernetes\main.yaml
+﻿kubectl delete deployment aspnetcorewebapi-deployment
+kubectl delete service aspnetcorewebapi-clusterip
+kubectl delete service aspnetcorewebapi-nodeport
+kubectl delete ingress aspnetcorewebapi-ingress
+kubectl apply -f G:\visual_studio_projects\AspNetCoreWebApi\Kubernetes\main.yaml
 
 kubectl get nodes --all-namespaces=true
 kubectl get deployments --all-namespaces=true

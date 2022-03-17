@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApp", "AspNetCoreWebApp\AspNetCoreWebApp.csproj", "{38D9D671-0F6B-4167-9D62-ED2EC9F06870}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BE01FF6-FDE3-4C1A-A18C-6AA4AF8E728F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{BB3EEEC7-96CB-432D-9835-8CE24E9010B0}"
 	ProjectSection(SolutionItems) = preProject
 		Kubernetes\command_line.txt = Kubernetes\command_line.txt

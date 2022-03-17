@@ -38,3 +38,5 @@ docker push p2972014/aspnetcorewebapp_linux
 docker-compose -f "G:\visual_studio_projects\AspNetCoreWebApp\docker-compose_linux.yml" up -d
 start https://localhost:8091
 start http://localhost:8090
+
+docker build -f "G:\visual_studio_projects\AspNetCoreWebApp\AspNetCoreWebApp\Dockerfile" --force-rm -t aspnetcorewebapp "G:\visual_studio_projects\AspNetCoreWebApp"
