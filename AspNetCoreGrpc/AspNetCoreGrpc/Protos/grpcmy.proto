@@ -2,20 +2,20 @@ syntax = "proto3";
 
 option csharp_namespace = "AspNetCoreGrpc";
 
-package greet;
+package GrpcMypkg1;
 
 // The greeting service definition.
-service MyGrpcService1 {
+service GrpcMy {
   // Sends a greeting
-  rpc MyGrpcSayHello (MyGrpcHelloRequest) returns (MyGrpcHelloReply);
+  rpc GrpcMySayHello (GrpcMyHelloRequest) returns (GrpcMyHelloReply);
 }
 
 // The request message containing the user's name.
-message MyGrpcHelloRequest {
+message GrpcMyHelloRequest {
   string m_field_1_name = 1;
 }
 
 // The response message containing the greetings.
-message MyGrpcHelloReply {
+message GrpcMyHelloReply {
   string m_field_1_message = 1;
 }
