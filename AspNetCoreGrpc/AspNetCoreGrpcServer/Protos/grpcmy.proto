@@ -7,7 +7,7 @@ package GrpcMypkg1;
 // The service definition.
 service GrpcMy {
   // Called By client and sends a response from server to client
-  rpc GrpcMySayHello (GrpcMyRequest) returns (GrpcMyReply);
+  rpc GrpcMyFunc (GrpcMyRequest) returns (GrpcMyReply);
 }
 
 // The request message

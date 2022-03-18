@@ -13,7 +13,7 @@ namespace AspNetCoreGrpc.Services
             _logger = logger;
         }
 
-        public override Task<GrpcMyReply> GrpcMySayHello(GrpcMyRequest request, ServerCallContext context)
+        public override Task<GrpcMyReply> GrpcMyFunc(GrpcMyRequest request, ServerCallContext context)
         {
             var tmp_sended_obj =
                 new GrpcMyReply
