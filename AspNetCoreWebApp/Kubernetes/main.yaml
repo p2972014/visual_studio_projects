@@ -32,22 +32,6 @@ spec:
             - name: Docker_Db_Development_Password
               value: "0"
 ---
-# не обязательно для доступа извне
-apiVersion: v1
-kind: Service
-metadata:
-# может использоваться в url для доступа внутри сети, например http://aspnetcorewebapp-clusterip
-  name: aspnetcorewebapp-clusterip 
-spec:
-  type: ClusterIP
-  selector:
-    app: aspnetcorewebapp
-  ports:
-  - name: aspnetcorewebapp
-    protocol: TCP
-    port: 80 # порт доступа к этому сервису внутри сети
-    targetPort: 80 # порт приложения (kind: Deployment)
----
 # для доступа с локального ПК
     # https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
     # https://www.bmc.com/blogs/kubernetes-port-targetport-nodeport/
@@ -67,10 +51,26 @@ spec:
       protocol: TCP
       port: 80 # порт доступа к этому сервису внутри сети
       targetPort: 80 # порт приложения (kind: Deployment)
-      nodePort: 32501 # порт для доступа с локального ПК
+      nodePort: 32005 # порт для доступа с локального ПК
         # https://kubernetes.io/ru/docs/tutorials/kubernetes-basics/expose/expose-intro/
 ---
-# не обязательно для доступа извне
+# для доступа внутри сети Kubernetes
+apiVersion: v1
+kind: Service
+metadata:
+# может использоваться в url для доступа внутри сети, например http://aspnetcorewebapp-clusterip
+  name: aspnetcorewebapp-clusterip 
+spec:
+  type: ClusterIP
+  selector:
+    app: aspnetcorewebapp
+  ports:
+  - name: aspnetcorewebapp
+    protocol: TCP
+    port: 80 # порт доступа к этому сервису внутри сети Kubernetes
+    targetPort: 80 # порт приложения (kind: Deployment)
+---
+# для доступа с локального ПК только для порта 80
     # https://kubernetes.io/docs/concepts/services-networking/ingress/
     # https://stackoverflow.com/questions/56243121/can-i-set-custom-ports-for-a-kubernetes-ingress-to-listen-on-besides-80-443
 apiVersion: networking.k8s.io/v1
@@ -93,3 +93,21 @@ spec:
             name: aspnetcorewebapp-clusterip
             port:
               number: 80
+---
+# доступ только через внешний ip
+    # https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnetcorewebapp-loadbalancer
+spec:
+  type: LoadBalancer
+  # externalTrafficPolicy: Local # Cluster
+  # Cluster: (default) Kubernetes will perform further balancing having the ability to forward the request to another node, adding one more hop in order to balance the load more efficciently
+  # Local: preserves the client source IP and avoids a second hop for LoadBalancer and NodePort type Services, but risks potentially imbalanced traffic spreading
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32005
+  selector:
+    name: aspnetcorewebapp-clusterip

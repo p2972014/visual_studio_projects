@@ -1,8 +1,15 @@
 ﻿kubectl delete deployment aspnetcorewebapp-deployment
 kubectl delete service aspnetcorewebapp-clusterip
 kubectl delete service aspnetcorewebapp-nodeport
+kubectl delete service aspnetcorewebapp-loadbalancer
+kubectl delete service aspnetcorewebapp-deployment
 kubectl delete ingress aspnetcorewebapp-ingress
+
+kubectl delete -f G:\visual_studio_projects\AspNetCoreWebApp\Kubernetes\main.yaml
 kubectl apply -f G:\visual_studio_projects\AspNetCoreWebApp\Kubernetes\main.yaml
+
+kubectl delete -f C:\Kubernetes\main.yaml
+kubectl apply -f C:\Kubernetes\main.yaml
 
 kubectl get nodes --all-namespaces=true
 kubectl get deployments --all-namespaces=true
@@ -10,6 +17,7 @@ kubectl get services --all-namespaces=true
 kubectl get ingress --all-namespaces=true
 kubectl get pods --all-namespaces=true
 
+cls
 kubectl get nodes
 kubectl get deployments
 kubectl get services
