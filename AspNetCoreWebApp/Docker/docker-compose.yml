@@ -14,7 +14,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\aspnetcorewebapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=QWE098spv
       - ASPNETCORE_HTTPS_PORT=8001
-      - Docker:Db:Development:Password=0
+      - Docker_Db_Development_Password=0
     ports:
       - 8000:80
       - 8001:443

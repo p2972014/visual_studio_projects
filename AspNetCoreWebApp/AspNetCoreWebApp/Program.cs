@@ -28,13 +28,14 @@ builder.Services.AddRazorPages();
 var _InDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 var _ConnectionString_key = _InDocker ? "DefaultConnection_docker" : "DefaultConnection";
 var _key_Docker_Db_Development_Password = @"Docker_Db_Development_Password";
-var tmp_ConnectionString_3 = builder.Configuration.GetConnectionString(_ConnectionString_key) ?? String.Empty;
-var tmp_Env_Docker_db_password = Environment.GetEnvironmentVariable(_key_Docker_Db_Development_Password);
-var tmp_Cfg_Db_Development_Password = builder.Configuration.GetValue<string>(_key_Docker_Db_Development_Password);
-var _ConnectionString = tmp_ConnectionString_3.Replace(@"{" + _key_Docker_Db_Development_Password + "}",
-    //tmp_Env_Docker_db_password
-    tmp_Cfg_Db_Development_Password
-    );
+var tmp_ConnectionString_template = builder.Configuration.GetConnectionString(_ConnectionString_key) ?? String.Empty;
+var tmp_Env_Docker_db_password = Environment.GetEnvironmentVariable(_key_Docker_Db_Development_Password); // из Environment variables
+var tmp_Cfg_Docker_db_password = builder.Configuration.GetValue<string>(_key_Docker_Db_Development_Password); // из User Secrets file
+var tmp_Docker_db_password =
+    String.IsNullOrEmpty(tmp_Env_Docker_db_password) == false
+    ? tmp_Env_Docker_db_password
+    : tmp_Cfg_Docker_db_password;
+var _ConnectionString = tmp_ConnectionString_template.Replace(@"{" + _key_Docker_Db_Development_Password + "}", tmp_Docker_db_password);
 
 builder.Services.AddDbContext<m_db1Context>(options => options.UseSqlServer(_ConnectionString));
 
@@ -91,7 +92,7 @@ app.UseMiddleware<MyMiddleware2>();
 
 app.Logger.LogInformation("_InDocker = " + _InDocker);
 app.Logger.LogInformation("tmp_Env_Docker_db_password = " + tmp_Env_Docker_db_password);
-app.Logger.LogInformation("tmp_Cfg_Db_Development_Password = " + tmp_Cfg_Db_Development_Password);
+app.Logger.LogInformation("tmp_Cfg_Docker_db_password = " + tmp_Cfg_Docker_db_password);
 app.Logger.LogInformation("_ConnectionString = " + _ConnectionString);
 
 //---
