@@ -69,6 +69,21 @@ app.MapRazorPages();
 
 //---
 
+// Migrate and seed the database during startup. Must be synchronous.
+try
+{
+    using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+    {
+        serviceScope.ServiceProvider.GetService<m_db1Context>()?.Database.Migrate();
+    }
+}
+catch (Exception ex)
+{
+    app.Logger.LogError(ex, ex.Message);
+}
+
+//---
+
 app.UseMiddleware<MyMiddleware1>();
 app.UseMiddleware<MyMiddleware2>();
 

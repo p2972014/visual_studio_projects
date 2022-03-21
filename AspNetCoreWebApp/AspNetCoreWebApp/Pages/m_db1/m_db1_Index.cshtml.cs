@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreWebApp.Models;
+using Microsoft.EntityFrameworkCore.Migrations;
+using AspNetCoreWebApp.Migrations;
 
 namespace AspNetCoreWebApp
 {
@@ -19,7 +21,7 @@ namespace AspNetCoreWebApp
             _context = context;
         }
 
-        public IList<MT1> MT1 { get;set; }
+        public IList<MT1> MT1 { get; set; }
 
         public async Task OnGetAsync()
         {
