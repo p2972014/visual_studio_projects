@@ -12,9 +12,25 @@ namespace AspNetCoreWebApi_from_empty
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { 
-                "this assembly: " + this?.GetType()?.Assembly?.FullName, 
+            return new string[] {
+                "this assembly: " + this?.GetType()?.Assembly?.FullName,
                 "value1", "value2" };
+        }
+
+        // http://localhost:5158/api/Values/get2
+        [Route("get2")]
+        [HttpGet]
+        public string Get2()
+        {
+            return "Route get2";
+        }
+
+        //http://localhost:5158/api/Values/custom/url/to/destination
+        [Route("custom/url/to/destination")]
+        [HttpGet]
+        public string Get3()
+        {
+            return "Route get3";
         }
 
         // GET api/<ValuesController>/5
