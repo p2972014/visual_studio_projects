@@ -12,8 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 //---
 
-var tmp_swagger_document_name = "mydocname1";
-var tmp_route_template = "/swagger/{documentName}/swagger.json";
+const string 
+    tmp_swagger_document_name = "mydocname1",
+    tmp_route_prefix = @"myprefix1",
+    tmp_route_template = "/"+ tmp_route_prefix + "/{documentName}/swagger.json"
+    ;
 builder.Services.AddSwaggerGen(
     c =>
 {
@@ -29,7 +32,7 @@ builder.Services.AddSwaggerGen(
 
 //---
 
-builder.Services.AddDbContext<m_db1Context>(options => 
+builder.Services.AddDbContext<m_db1Context>(options =>
     options
     .UseLazyLoadingProxies()
     .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -53,8 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint(tmp_route_template.Replace("{documentName}", tmp_swagger_document_name), tmp_swagger_document_name);
-        //options.RoutePrefix = String.Empty;
-        options.RoutePrefix = @"myprefix1";
+        options.RoutePrefix = tmp_route_prefix;
     });
 }
 
