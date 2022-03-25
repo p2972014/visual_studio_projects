@@ -1,0 +1,4 @@
+dotnet tool update --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Oracle.EntityFrameworkCore
+dotnet ef dbcontext scaffold "User Id=SYS;DBA Privilege=SYSDBA;Password=0;Data Source=localhost:1521/XE;" Oracle.EntityFrameworkCore --table MY_TABLE1 -o Models -f --use-database-names --context m_oracle_db_xe

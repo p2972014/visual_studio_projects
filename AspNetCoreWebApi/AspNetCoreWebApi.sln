@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{296F5A
 		Docker\command_line.txt = Docker\command_line.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreWebApiVNetC3d1", "AspNetCoreWebApiVNetC3d1\AspNetCoreWebApiVNetC3d1.csproj", "{D79ED789-0F9F-4959-BE55-F9FDD45421A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApiVNetC3d1", "AspNetCoreWebApiVNetC3d1\AspNetCoreWebApiVNetC3d1.csproj", "{D79ED789-0F9F-4959-BE55-F9FDD45421A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

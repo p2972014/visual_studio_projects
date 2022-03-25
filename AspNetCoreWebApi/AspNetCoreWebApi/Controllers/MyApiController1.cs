@@ -34,6 +34,14 @@ namespace AspNetCoreWebApi.Controllers
             return _context.MRelMT1MT2s.Take(10).ToArray();
         }
 
+        //http://localhost:5208/api/MyApiController1/custom/url/to/destination
+        [Route("custom/url/to/destination")]
+        [HttpGet]
+        public string Get3()
+        {
+            return "Route get3";
+        }
+
         // GET api/<MyApiController1>/5
         [HttpGet("{id}", Name = null, Order = 10)]
         public string Get(int id)
