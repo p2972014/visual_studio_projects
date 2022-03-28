@@ -15,8 +15,14 @@ namespace AspNetCoreWebAppOAuth.Controllers
         private const int m_remember_minutes_span_default = 10;
 
         [HttpGet]
+        public string Get()
+        {
+            return "MyAuthController";
+        }
+
+        [HttpGet]
         //[HttpPost]
-        [Route("api/[controller]/login")]
+        [Route("login")]
         public async Task<IActionResult> LoginAsync(string LoginName, bool RememberLogin, int? remember_minutes_span)
         {
             var address = new
@@ -64,16 +70,16 @@ namespace AspNetCoreWebAppOAuth.Controllers
 
             await HttpContext.SignInAsync(isuser, props);
 
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
 
         [HttpGet]
-        [Route("api/[controller]/logout")]
+        [Route("logout")]
         public async Task<IActionResult> LogoutAsync()
         {
             await HttpContext.SignOutAsync();
 
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
     }
 }
