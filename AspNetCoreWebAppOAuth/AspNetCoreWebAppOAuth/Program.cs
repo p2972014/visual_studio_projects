@@ -1,18 +1,35 @@
+using AspNetCoreWebAppOAuth;
+using IdentityServer4.Stores;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-//   .AddNegotiate();
-
-//builder.Services.AddAuthorization(options =>
-//{
-//    // By default, all incoming requests will be authorized according to the default policy.
-//    options.FallbackPolicy = options.DefaultPolicy;
-//});
 builder.Services.AddRazorPages();
+
+builder.Services.AddControllers();
+
+builder.Services.AddIdentityServer(options =>
+    {
+        //options.;
+    })
+//InvalidOperationException: Unable to resolve service for type 'IdentityServer4.Stores.IClientStore' while attempting to activate 'IdentityServer4.Services.LogoutNotificationService'.
+.AddClientStore<MyClientStore>() //обязательно
+//InvalidOperationException: Unable to resolve service for type 'IdentityServer4.Stores.IResourceStore' while attempting to activate 'IdentityServer4.Validation.DefaultResourceValidator'.
+.AddResourceStore<MyResourceStore>() //обязательно
+;
+
+builder.Services.AddAuthentication()
+    //.AddCertificate(options =>
+    //{
+    //    options.AllowedCertificateTypes = CertificateTypes.All;
+    //    options.RevocationMode = X509RevocationMode.NoCheck;
+    //})
+    ;
+
 
 var app = builder.Build();
 
@@ -29,9 +46,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapControllers();
 
 app.Run();

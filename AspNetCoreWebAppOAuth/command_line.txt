@@ -1,0 +1,4 @@
+http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
+
+// добавление шаблонов для создания сервера авторизации
+dotnet new -i IdentityServer4.Templates
