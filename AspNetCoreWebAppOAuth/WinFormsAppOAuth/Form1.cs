@@ -7,6 +7,7 @@ using System.Text;
 
 namespace WinFormsAppOAuth
 {
+    //https://jasonwatmore.com/post/2021/06/02/net-5-create-and-validate-jwt-tokens-use-custom-jwt-middleware
     public partial class Form1 : Form
     {
         public Form1()
