@@ -1,8 +1,4 @@
 using AspNetCoreWebAppOAuth;
-using IdentityServer4.Stores;
-using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.Authentication.Negotiate;
-using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddIdentityServer(options =>
     {
-        //options.;
+        
     })
 //InvalidOperationException: Unable to resolve service for type 'IdentityServer4.Stores.IClientStore' while attempting to activate 'IdentityServer4.Services.LogoutNotificationService'.
 .AddClientStore<MyClientStore>() //обязательно
@@ -22,13 +18,7 @@ builder.Services.AddIdentityServer(options =>
 .AddResourceStore<MyResourceStore>() //обязательно
 ;
 
-builder.Services.AddAuthentication()
-    //.AddCertificate(options =>
-    //{
-    //    options.AllowedCertificateTypes = CertificateTypes.All;
-    //    options.RevocationMode = X509RevocationMode.NoCheck;
-    //})
-    ;
+builder.Services.AddAuthentication();
 
 
 var app = builder.Build();
