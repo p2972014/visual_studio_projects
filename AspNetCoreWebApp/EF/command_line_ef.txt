@@ -14,7 +14,7 @@ Unable to find provider assembly 'Microsoft.EntityFrameworkCore.SqlServer'. Ensu
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
-dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection=True" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
+dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Models/db1 --output-dir Models/db1/Tables  -f --use-database-names
 
 --- добавление миграции изменений
 
