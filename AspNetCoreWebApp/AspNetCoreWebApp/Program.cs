@@ -1,4 +1,3 @@
-using AspNetCoreWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using AspNetCoreWebApp.Middlewares;
+using AspNetCoreWebApp.Models.db1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,17 +72,17 @@ app.MapRazorPages();
 //---
 
 // Migrate and seed the database during startup. Must be synchronous.
-try
-{
-    using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-    {
-        serviceScope.ServiceProvider.GetService<m_db1Context>()?.Database.Migrate();
-    }
-}
-catch (Exception ex)
-{
-    app.Logger.LogError(ex, ex.Message);
-}
+//try
+//{
+//    using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+//    {
+//        serviceScope.ServiceProvider.GetService<m_db1Context>()?.Database.Migrate();
+//    }
+//}
+//catch (Exception ex)
+//{
+//    app.Logger.LogError(ex, ex.Message);
+//}
 
 //---
 

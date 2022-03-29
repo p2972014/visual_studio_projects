@@ -7,21 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreWebApp.Models;
+using AspNetCoreWebApp.Models.db1;
+using AspNetCoreWebApp.Models.db1.Tables;
 
-namespace AspNetCoreWebApp
+namespace AspNetCoreWebApp.Pages.m_db1
 {
     public class EditModel : PageModel
     {
-        private readonly AspNetCoreWebApp.Models.m_db1Context _context;
+        private readonly AspNetCoreWebApp.Models.db1.m_db1Context _context;
 
-        public EditModel(AspNetCoreWebApp.Models.m_db1Context context)
+        public EditModel(AspNetCoreWebApp.Models.db1.m_db1Context context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public MT1 MT1 { get; set; }
+        public m_t1 m_t1 { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long? id)
         {
@@ -30,9 +31,9 @@ namespace AspNetCoreWebApp
                 return NotFound();
             }
 
-            MT1 = await _context.MT1s.FirstOrDefaultAsync(m => m.MId == id);
+            m_t1 = await _context.m_t1s.FirstOrDefaultAsync(m => m.m_id == id);
 
-            if (MT1 == null)
+            if (m_t1 == null)
             {
                 return NotFound();
             }
@@ -45,10 +46,10 @@ namespace AspNetCoreWebApp
         {
             if (!ModelState.IsValid)
             {
-                //return Page();
+                return Page();
             }
 
-            _context.Attach(MT1).State = EntityState.Modified;
+            _context.Attach(m_t1).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +57,7 @@ namespace AspNetCoreWebApp
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MT1Exists(MT1.MId))
+                if (!m_t1Exists(m_t1.m_id))
                 {
                     return NotFound();
                 }
@@ -69,9 +70,9 @@ namespace AspNetCoreWebApp
             return RedirectToPage("./Index");
         }
 
-        private bool MT1Exists(long id)
+        private bool m_t1Exists(long id)
         {
-            return _context.MT1s.Any(e => e.MId == id);
+            return _context.m_t1s.Any(e => e.m_id == id);
         }
     }
 }
