@@ -42,6 +42,14 @@ namespace AspNetCoreWebApi.Controllers
             return "Route get3";
         }
 
+        //http://localhost:5208/api/MyApiController1/custom/url/to/destination/123
+        [Route("custom/url/to/destination/{id}")]
+        [HttpGet]
+        public string Get3(int id)
+        {
+            return "Route get3. id=" + id;
+        }
+
         // GET api/<MyApiController1>/5
         [HttpGet("{id}", Name = null, Order = 10)]
         public string Get(int id)
