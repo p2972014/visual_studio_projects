@@ -6,7 +6,7 @@ namespace AspNetCoreWebAppOAuth.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     
     public class ValuesController : ControllerBase
     {
@@ -14,6 +14,14 @@ namespace AspNetCoreWebAppOAuth.Controllers
         public string Get()
         {
             return "ValuesController";
+        }
+
+        [Route("my_private_func")]
+        [HttpGet]
+        [Authorize]
+        public string my_private_func()
+        {
+            return "my_private_func";
         }
     }
 }
