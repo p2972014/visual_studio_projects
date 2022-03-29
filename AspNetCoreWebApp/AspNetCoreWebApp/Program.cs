@@ -38,6 +38,7 @@ var tmp_Docker_db_password =
 var _ConnectionString = tmp_ConnectionString_template.Replace(@"{" + _key_Docker_Db_Development_Password + "}", tmp_Docker_db_password);
 
 builder.Services.AddDbContext<m_db1Context>(options => options.UseSqlServer(_ConnectionString));
+//builder.Services.AddDbContext<m_db1Context>(options => options.UseInMemoryDatabase(databaseName: "m_mem_db1"));
 
 //---
 
@@ -82,6 +83,24 @@ catch (Exception ex)
 {
     app.Logger.LogError(ex, ex.Message);
 }
+
+//---
+
+//try
+//{
+//    // в одном try catch не работает
+//    using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+//    {
+//        var db_context = serviceScope.ServiceProvider.GetService<m_db1Context>();
+
+//        db_context?.MT1s.Add(new MT1() { MId = 1, MC1Text = "2", MC2Decimal = 3, MC3Date = new DateTime(2022, 03, 04) });
+//        db_context?.SaveChanges();
+//    }
+//}
+//catch (Exception ex)
+//{
+//    app.Logger.LogError(ex, ex.Message);
+//}
 
 //---
 

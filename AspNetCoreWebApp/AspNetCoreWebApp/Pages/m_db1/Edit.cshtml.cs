@@ -45,7 +45,7 @@ namespace AspNetCoreWebApp
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
 
             _context.Attach(MT1).State = EntityState.Modified;

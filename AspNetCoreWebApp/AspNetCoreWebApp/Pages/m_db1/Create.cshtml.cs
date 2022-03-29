@@ -32,7 +32,7 @@ namespace AspNetCoreWebApp
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
 
             _context.MT1s.Add(MT1);
