@@ -2,8 +2,8 @@
 
 cd "AspNetCoreWebApi"
 
-dotnet tool install --global dotnet-ef
-dotnet tool update --global dotnet-ef
+// dotnet tool install --global dotnet-ef
+// dotnet tool update --global dotnet-ef
 (
 Your startup project 'AspNetCoreWebApp' doesn't reference Microsoft.EntityFrameworkCore.Design. This package is required for the Entity Framework Core Tools to work. Ensure your startup project is correct, install the package, and try again.
 )
