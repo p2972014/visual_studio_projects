@@ -18,4 +18,4 @@ dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection
 
 --- добавление миграции изменений
 
-dotnet ef migrations add Migration_2022_03_21_4 --context m_db1Context --verbose
+dotnet ef migrations add Migration_1 --context m_db1Context --verbose
