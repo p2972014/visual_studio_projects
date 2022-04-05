@@ -1,5 +1,3 @@
---- создание модели из существующей БД
-
 cd "AspNetCoreWebApi"
 
 // dotnet tool install --global dotnet-ef
@@ -12,6 +10,8 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 // Unable to find provider assembly 'Microsoft.EntityFrameworkCore.SqlServer'. Ensure the name is correct and it's referenced by the project.
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 // dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 3.1
+
+--- создание модели из существующей БД
 
 dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection=True;User ID=sa;Password=QWE098spv" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
 dotnet ef dbcontext scaffold "Server=localhost;Database=m_db1;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Models/db1 --output-dir Models/db1/Tables  -f --use-database-names
