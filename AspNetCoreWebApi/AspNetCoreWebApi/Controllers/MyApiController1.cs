@@ -18,6 +18,10 @@ namespace AspNetCoreWebApi.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// descr1
+        /// </summary>
+        /// <returns></returns>
         // GET: api/<MyApiController1>
         [HttpGet(Name = "GetMyApiController1")]
         //public IEnumerable<string> Get()

@@ -261,17 +261,37 @@ namespace WinFormsApp1
                 );
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void vsl_btn_async_from_sync_Click(object sender, EventArgs e)
         {
-            RunMyFunc(() =>
-                {
-                    //Task.Run(() =>
-                    //{
-                        sub2().Wait();
-                        Task.Delay(1000).Wait();
-                    //}).Wait();
-                }
-                );
+            goto lbl_no_deadlock;
+            { }
+        lbl_deadlock:
+            { }
+            SyncFromAsync().Wait();
+            DeadlockNoResultAsync().Wait();
+            DeadlockTaskDelayAsync().Wait();
+            using (var _lock = new SemaphoreSlim(1))
+            {
+                _lock.Wait();
+                DeadlockTaskDelayAsync().Wait();
+                _lock.Release();
+            }
+            
+            { }
+        lbl_no_deadlock:
+            { }
+            Task.Delay(100).Wait();
+            Task.Run(SyncFromAsync).Wait();            
+            Task.Run(DeadlockNoResultAsync).Wait();
+            var ret = Task.Run(DeadlockAsync).Result;            
+            using (var _lock = new SemaphoreSlim(1))
+            {
+                _lock.Wait();
+                Task.Delay(100).Wait();
+                _lock.Release();
+            }
+
+            textBox1.Text = DateTime.Now.ToString() + ". Deadlock";
         }
         private async Task sub2()
         {
@@ -284,6 +304,35 @@ namespace WinFormsApp1
             AddStr(DateTime.Now.ToString() + ". sub3. 1");
             Task.Delay(100).Wait();
             AddStr(DateTime.Now.ToString() + ". sub3. 2");
+        }
+
+        private async Task DeadlockTaskDelayAsync()
+        {
+            await Task.Delay(100);
+        }
+
+        private async Task SyncFromAsync()
+        {
+            await Task.Run(DeadlockTaskDelay);
+        }
+        private void DeadlockTaskDelay()
+        {
+            Task.Delay(100).Wait();
+        }
+
+        private async Task<string> DeadlockAsync()
+        {
+            //await Task.Delay(100);           
+            using var q = new HttpClient();
+            var ret = await (await q.GetAsync("https://www.google.com")).Content.ReadAsStringAsync();
+            return ret;
+        }
+
+        private async Task DeadlockNoResultAsync()
+        {
+            //await Task.Delay(100);           
+            using var q = new HttpClient();
+            var ret = await (await q.GetAsync("https://www.google.com")).Content.ReadAsStringAsync();
         }
     }
 }

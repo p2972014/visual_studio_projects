@@ -1,6 +1,7 @@
 using AspNetCoreWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,16 @@ builder.Services.AddSwaggerGen(
                 Url = new Uri("https://example.com/license")
             }
         });
+    /*
+в .csproj:
+      <PropertyGroup>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+      </PropertyGroup>
+     */
+    // —сылка на файл xml-документации сборок с Web API
+    var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
+    c.IncludeXmlComments(xmlPath, true);
 }
 );
 
