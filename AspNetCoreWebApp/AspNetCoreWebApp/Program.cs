@@ -9,6 +9,7 @@ using AspNetCoreWebApp.Middlewares;
 using AspNetCoreWebApp.Models.db1;
 
 //m7
+//b3 8
 
 var builder = WebApplication.CreateBuilder(args);
 
