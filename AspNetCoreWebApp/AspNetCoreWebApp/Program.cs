@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using AspNetCoreWebApp.Middlewares;
 using AspNetCoreWebApp.Models.db1;
 
-//main b
-//b3
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
