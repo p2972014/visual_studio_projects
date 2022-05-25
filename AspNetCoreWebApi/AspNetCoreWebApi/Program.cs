@@ -1,4 +1,5 @@
 using AspNetCoreWebApi.Models;
+using AspNetCoreWebApi.Models.db1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -58,7 +59,7 @@ builder.Services.AddSwaggerGen(
 
 builder.Services.AddDbContext<m_db1Context>(options =>
     options
-    .UseLazyLoadingProxies()
+    //.UseLazyLoadingProxies()
     .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 

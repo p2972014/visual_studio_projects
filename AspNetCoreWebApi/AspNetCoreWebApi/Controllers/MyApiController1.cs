@@ -1,6 +1,6 @@
-﻿using AspNetCoreWebApi.Models;
+﻿using AspNetCoreWebApi.Models.db1;
+using AspNetCoreWebApi.Models.db1.Tables;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace AspNetCoreWebApi.Controllers
@@ -23,18 +23,18 @@ namespace AspNetCoreWebApi.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: api/<MyApiController1>
-        [HttpGet(Name = "GetMyApiController1")]
+        [HttpGet]
         //public IEnumerable<string> Get()
         //{
         //    return new string[] { "value1", "value2" };
         //    //return _context.MT1s.Take(10).ToArray();
         //}
-        public IEnumerable<MRelMT1MT2> Get()
+        public IEnumerable<m_rel_m_t1_m_t2> Get()
         {
             //https://docs.microsoft.com/en-us/ef/core/querying/related-data/eager
             //return _context.MRelMT1MT2s.Include(it => it.MT1M).Include(it => it.MT2M).Take(10).ToArray();
             //https://docs.microsoft.com/en-us/ef/core/querying/related-data/lazy
-            return _context.MRelMT1MT2s.Take(10).ToArray();
+            return _context.m_rel_m_t1_m_t2s.Take(10).ToArray();
         }
 
         //http://localhost:5208/api/MyApiController1/custom/url/to/destination
@@ -64,6 +64,13 @@ namespace AspNetCoreWebApi.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            //using (var t = _context.Database.BeginTransaction())
+            //{
+            //    _context.m_t3s.Add(new m_t3() { m_text = DateTime.Now.ToString() });
+            //    _context.SaveChanges();
+            //    t.Commit();                
+            //    t.Rollback();
+            //}
         }
 
         // PUT api/<MyApiController1>/5
