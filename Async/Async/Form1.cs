@@ -281,6 +281,7 @@ namespace WinFormsApp1
         lbl_no_deadlock:
             { }
             Task.Delay(100).Wait();
+            Task.Run(DeadlockTaskDelayAsync).Wait();
             Task.Run(SyncFromAsync).Wait();            
             Task.Run(DeadlockNoResultAsync).Wait();
             var ret = Task.Run(DeadlockAsync).Result;            

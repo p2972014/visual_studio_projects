@@ -42,3 +42,5 @@ msbuild.wrn
 /ConsoleApp1
 /WinFormsApp1
 /NemoTravelTestWebApi/NemoTravelTestWebApi
+/Tests
+/_job_tests
